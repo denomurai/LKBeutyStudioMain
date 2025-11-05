@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "614586774097",
+    "project_id": "lkbeutystudio2",
+    "storage_bucket": "lkbeutystudio2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614586774097:android:1ec1fc33964a60c7eebe70",
+        "android_client_info": {
+          "package_name": "com.example.lkbeautystore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPEVrrOaZ3Bkmo8AxAFvNO4f9dwX3diZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
