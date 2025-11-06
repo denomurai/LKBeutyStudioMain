@@ -22,6 +22,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.example.lkbeautystore.navigation.AppNavHost
+import com.example.lkbeautystore.navigation.ROUTE_CUST_BOOKING_HISTORY
+import com.example.lkbeautystore.navigation.ROUTE_CUST_VEIW_EYEBROS
+import com.example.lkbeautystore.navigation.ROUTE_CUST_VIEW_LASHES
+import com.example.lkbeautystore.navigation.ROUTE_CUST_VIEW_LIP
 import com.example.lkbeautystore.navigation.ROUTE_SPLASH
 import com.example.lkbeautystore.navigation.ROUTE_USER_LOGIN
 import com.example.lkbeautystore.navigation.Routes
@@ -63,12 +67,28 @@ fun MainScreen() {
                 Divider()
 
                 TextButton (onClick = {
-                    navController.navigate(Routes.EyebrowsService)
+                    navController.navigate(ROUTE_CUST_VEIW_EYEBROS)
                     scope.launch { drawerState.close() }
                 }) { Text("Eyebrows Service") }
 
+                Divider()
+
+                TextButton (onClick = {
+                    navController.navigate(ROUTE_CUST_VIEW_LIP)
+                    scope.launch { drawerState.close() }
+                }) { Text("Lip Service") }
+
+                Divider()
+
+                TextButton (onClick = {
+                    navController.navigate(ROUTE_CUST_VIEW_LASHES)
+                    scope.launch { drawerState.close() }
+                }) { Text("Lip Service") }
+
+                Divider()
+
                 TextButton(onClick = {
-                    navController.navigate(Routes.BookingHistory)
+                    navController.navigate(ROUTE_CUST_BOOKING_HISTORY)
                     scope.launch { drawerState.close() }
                 }) { Text("Booking History") }
 

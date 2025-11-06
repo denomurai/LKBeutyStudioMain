@@ -64,7 +64,7 @@ fun custViewLashesScreen (navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Lip Services") },
+                title = { Text("Lashes Services") },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
@@ -88,7 +88,7 @@ fun custViewLashesScreen (navController: NavController) {
                     .padding(innerPadding),
                 contentAlignment = Alignment.Center
             ) {
-                Text("No Lip Services Available", color = Color.Gray)
+                Text("No Lashes Services Available", color = Color.Gray)
             }
         } else {
             LazyColumn(

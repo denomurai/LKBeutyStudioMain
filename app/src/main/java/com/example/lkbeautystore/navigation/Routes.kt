@@ -16,6 +16,8 @@ const val ROUTE_SPLASH = "splashscreen"
 
 const val ROUTE_CUST_VIEW_LIP ="cust_view_lip"
 
+const val ROUTE_CUST_VIEW_LASHES ="cust_view_lashes"
+
 //Admin ROUTES
 
 const val ROUTE_ADMIN_LOGIN = "admin_login"
@@ -45,6 +47,10 @@ const val ROUTE_ADMIN_UPDATE_LIP="admin_update_lip"
 const val ROUTE_ADMIN_VIEW_LASHES ="admin_view_lashes"
 
 const val ROUTE_ADMIN_UPDATE_LASHES="admin_update_lashes"
+
+const val ROUTE_CUST_BOOKING_HISTORY ="cust_booking_history"
+
+
 
 
 

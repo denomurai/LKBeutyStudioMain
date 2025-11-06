@@ -40,6 +40,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.lkbeautystore.R
 import com.example.lkbeautystore.navigation.ROUTE_ADMIN_LOGIN
 import com.example.lkbeautystore.navigation.ROUTE_CUST_VEIW_EYEBROS
+import com.example.lkbeautystore.navigation.ROUTE_CUST_VIEW_LASHES
 import com.example.lkbeautystore.navigation.ROUTE_CUST_VIEW_LIP
 
 // Customer Dashboard
@@ -70,16 +71,13 @@ fun dashBoardScreen (  navController: NavController,
         bottomBar = {
             NavigationBar(containerColor = Color(color = +0xff28a9b5), )
             {
-                Column(modifier = Modifier.fillMaxWidth()) {
+                Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
                         "\u00A9 Lk Beauty Studio 2025", modifier = Modifier.padding(16.dp),
                         color = Color.White,
                         fontSize = 20.sp
                     )
-                    Column (modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.End){
 
-                        TextButton(onClick = {navController.navigate(ROUTE_ADMIN_LOGIN)}) { Text("Admin Login", modifier = Modifier) }
-                    }
                 }
             }
         }
@@ -124,7 +122,8 @@ fun dashBoardScreen (  navController: NavController,
                 }
             }//End of Lips services
 
-            Card (modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+            Card (modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp).clickable{navController.navigate(
+                ROUTE_CUST_VIEW_LASHES)},
                 elevation = CardDefaults.cardElevation(10.dp),
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(color = 0xFFB519A0))
@@ -139,7 +138,8 @@ fun dashBoardScreen (  navController: NavController,
                 }
             }// End of eye lashes
 
-            Card (modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+            Card (modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp).clickable{navController.navigate(
+                ROUTE_CUST_VIEW_LIP)},
                 elevation = CardDefaults.cardElevation(10.dp),
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(color = 0xFFB519A0))
@@ -149,7 +149,7 @@ fun dashBoardScreen (  navController: NavController,
                     Icon(Icons.Default.Person, contentDescription = "Add Employee", modifier = Modifier.size(40.dp), Color(0xFF004D40))
                     Spacer(modifier = Modifier.width(20.dp))
 
-                    Text("OTHER SERVICES",fontSize = 20.sp, color = Color.White)
+                    Text(" BOOKING HISTORY",fontSize = 20.sp, color = Color.White)
 
                 }
             }//Other Services

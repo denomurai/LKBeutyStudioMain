@@ -22,6 +22,7 @@ import com.example.lkbeautystore.ui.theme.AdminScreens.viewLipServicesScreen
 import com.example.lkbeautystore.ui.theme.CustomerScreens.bookingEyebrowsScreen
 import com.example.lkbeautystore.ui.theme.CustomerScreens.custBookingScreen
 import com.example.lkbeautystore.ui.theme.CustomerScreens.custViewEybrowsScreen
+import com.example.lkbeautystore.ui.theme.CustomerScreens.custViewLashesScreen
 import com.example.lkbeautystore.ui.theme.CustomerScreens.custViewLipScreen
 import com.example.lkbeautystore.ui.theme.CustomerScreens.dashBoardScreen
 import com.example.lkbeautystore.ui.theme.CustomerScreens.userLogin
@@ -61,7 +62,10 @@ fun AppNavHost(
         composable(ROUTE_CUST_VEIW_EYEBROS) {
             custViewEybrowsScreen(navController)
         }
-        composable (ROUTE_CUST_VIEW_LIP){ custViewLipScreen(navController) }
+        composable (ROUTE_CUST_VIEW_LIP){
+            custViewLipScreen(navController) }
+
+        composable (ROUTE_CUST_VIEW_LASHES){ custViewLashesScreen(navController) }
 
         // Book service with arguments
         composable(
@@ -153,6 +157,9 @@ fun AppNavHost(
             UpdateEyebrows(navController, id)
         }
 
+        composable(ROUTE_CUST_BOOKING_HISTORY){
+            custBookingScreen(navController)}
+
         // -------------------- DRAWER ROUTES -------------------- //
         // ✅ DASHBOARD (Drawer works here)
         composable(Routes.Dashboard) {
@@ -182,7 +189,7 @@ fun AppNavHost(
              adminLoginScreen(navController)
          }*/
 
-        composable(
+        /*composable(
             route = Routes.BookingScreen,
             arguments = listOf(
                 navArgument("name") { type = NavType.StringType },
@@ -194,7 +201,7 @@ fun AppNavHost(
             val desc = backStackEntry.arguments?.getString("desc") ?: ""
             val amount = backStackEntry.arguments?.getString("amount") ?: ""
             bookingEyebrowsScreen(navController, name, desc, amount)
-        }
+        }*/
         composable (ROUTE_SPLASH ){
             SplashScreen(){navController.navigate(ROUTE_USER_LOGIN)
             {popUpTo (ROUTE_SPLASH){inclusive=true} }  }

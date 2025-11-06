@@ -96,7 +96,7 @@ fun custLashesBookingScreen (navController: NavController) {
                 contentPadding = PaddingValues(vertical = 16.dp, horizontal = 12.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                // ✅ Pass cancel action to the card
+
                 items(bookings) { booking ->
                     LashesBookingCard(
                         booking = booking,
