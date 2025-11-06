@@ -229,15 +229,11 @@ fun adminDashboard (navController: NavController){
                         Spacer(modifier = Modifier.size(13.dp))
                         Row(modifier = Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
                             Button(
-                                onClick = {},
+                                onClick = {navController.navigate(ROUTE_ADMIN_VIEW_EYEBROWS_BOOKINGS)},
                                 colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)
                             )
-                            { Text("VIEW SERVICES") }
-                            Button(
-                                onClick = {  },
-                                colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)
-                            )
-                            { Text("ADD SERVICE") }
+                            { Text("VIEW BOOKED SERVICES") }
+
                         }
 
                     }

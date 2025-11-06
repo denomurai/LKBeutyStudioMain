@@ -3,6 +3,7 @@ package com.example.lkbeautystore.ui.theme.CustomerScreens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -39,120 +40,162 @@ import com.example.lkbeautystore.Models.EyebrowsModel
 import com.example.lkbeautystore.viewModel.ProductViewmodel
 
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.text.font.FontWeight
 
 
 // customer View Eyebrows Screen
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun custViewEybrowsScreen (navController: NavController){
-
-    val productViewmodel: ProductViewmodel=viewModel ()
-
+    val productViewModel: ProductViewmodel = viewModel()
     val context = LocalContext.current
-    val eyebrows=productViewmodel.eyebrows
+    val eyebrows = productViewModel.eyebrows
 
-    LaunchedEffect (Unit){
-        productViewmodel.fetchEyebrows(context)
+    // Fetch eyebrow data
+    LaunchedEffect(Unit) {
+        productViewModel.fetchEyebrows(context)
     }
 
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.LightGray),
-        contentPadding = PaddingValues(vertical = 50.dp, horizontal = 12.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        items(eyebrows) { eyebrow ->
-            EyebrowsCard(
-                eyebrows = eyebrow,
-
-                navController = navController
+    // Screen layout with a top bar
+    Scaffold (
+        topBar = {
+            TopAppBar(
+                title = { Text("Eyebrow Services") },
+                navigationIcon = {
+                    IconButton (onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back",
+                            tint = Color.White
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF28A9B5),
+                    titleContentColor = Color.White
+                )
             )
         }
+    ) { innerPadding ->
+
+        if (eyebrows.isEmpty()) {
+            // Empty state UI
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .background(Color(0xFFF8F8F8)),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "No Eyebrow Services Available",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = Color.Gray
+                )
+            }
+        } else {
+            // Show eyebrow list
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .background(Color(0xFFF8F8F8)),
+                contentPadding = PaddingValues(vertical = 16.dp, horizontal = 12.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                items(eyebrows) { eyebrow ->
+                    EyebrowsCard(eyebrow, navController)
+                }
+            }
+        }
     }
-
-
-
 }
-
-
-
 
 @Composable
 fun EyebrowsCard(
     eyebrows: EyebrowsModel,
-
     navController: NavController
-){
-
-
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight()
-            .shadow(elevation = 6.dp, shape = RoundedCornerShape(16.dp)),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+            .wrapContentHeight(),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        shape = RoundedCornerShape(16.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                eyebrows.imageUrl?.let { imageUrl ->
-                    AsyncImage(
-                        model = imageUrl,
-                        contentDescription = "Employee Image",
-                        modifier = Modifier
-                            .size(64.dp)
-                            .clip(CircleShape)
-                            .border(2.dp, MaterialTheme.colorScheme.primary, CircleShape),
-                        contentScale = ContentScale.Crop
-                    )
-                }
+                AsyncImage(
+                    model = eyebrows.imageUrl,
+                    contentDescription = "Service Image",
+                    modifier = Modifier
+                        .size(70.dp)
+                        .clip(CircleShape)
+                        .border(2.dp, Color(0xFF28A9B5), CircleShape),
+                    contentScale = ContentScale.Crop
+                )
 
                 Spacer(modifier = Modifier.width(12.dp))
 
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = eyebrows.name ?: "No name",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface
+                        text = eyebrows.name.ifEmpty { "Unnamed Service" },
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = Color(0xFF333333)
                     )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
                     Text(
-                        text = "Amount: ${eyebrows.amount ?: "N/A"}",
+                        text = "Ksh ${eyebrows.amount}",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = Color(0xFF28A9B5),
+                        fontWeight = FontWeight.SemiBold
                     )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
                     Text(
-                        text = "Description: ${eyebrows.description ?: "N/A"}",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurface
+                        text = eyebrows.description.ifEmpty { "No description available." },
+                        style = MaterialTheme.typography.bodySmall,
+                        color = Color.DarkGray
                     )
+                }
+            }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
-                    ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Button(
+                    onClick = {
+                        val nameEncoded = java.net.URLEncoder.encode(eyebrows.name, "UTF-8")
+                        val descEncoded = java.net.URLEncoder.encode(eyebrows.description, "UTF-8")
+                        val amountEncoded =
+                            java.net.URLEncoder.encode(eyebrows.amount.toString(), "UTF-8")
 
-
-                        Spacer(modifier = Modifier.width(8.dp))
-
-                        Button(onClick = {
-                            // Safely handle nulls and encode
-                            val nameEncoded = java.net.URLEncoder.encode(eyebrows.name ?: "", "UTF-8")
-                            val descEncoded = java.net.URLEncoder.encode(eyebrows.description ?: "", "UTF-8")
-                            val amountEncoded = java.net.URLEncoder.encode(eyebrows.amount?.toString() ?: "", "UTF-8")
-
-
-                            // Navigate to the booking screen
-                            navController.navigate("bookService/$nameEncoded/$descEncoded/$amountEncoded")
-                        }) {
-                            Text(
-                                text = "Book service",
-                                color = MaterialTheme.colorScheme.error,
-                                style = MaterialTheme.typography.labelLarge
-                            )
-                        }
-                    }
+                        navController.navigate("bookService/$nameEncoded/$descEncoded/$amountEncoded")
+                    },
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF28A9B5))
+                ) {
+                    Text(
+                        text = "Book Service",
+                        color = Color.White,
+                        style = MaterialTheme.typography.labelLarge
+                    )
                 }
             }
         }

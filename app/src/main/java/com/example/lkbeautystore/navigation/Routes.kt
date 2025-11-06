@@ -14,6 +14,8 @@ const val ROUTE_CUST_VEIW_EYEBROS ="cust_view_eyebrows"
 
 const val ROUTE_SPLASH = "splashscreen"
 
+const val ROUTE_CUST_VIEW_LIP ="cust_view_lip"
+
 //Admin ROUTES
 
 const val ROUTE_ADMIN_LOGIN = "admin_login"

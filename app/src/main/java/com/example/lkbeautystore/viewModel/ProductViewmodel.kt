@@ -189,6 +189,8 @@ class ProductViewmodel: ViewModel() {
             }
         }
     }
+
+
 // lip service starts
 
 
@@ -220,12 +222,12 @@ class ProductViewmodel: ViewModel() {
             try {
                 var imageUrl = ""
 
-                // ✅ Upload image to Cloudinary (same method as eyebrows)
+                //  Upload image to Cloudinary (same method as lip)
                 if (imageUri != null) {
                     imageUrl = uploadImageToCloudinary(context, imageUri)
                 }
 
-                // ✅ Generate unique ID for this service
+                //  Generate unique ID for this service
                 val id = FirebaseDatabase.getInstance().getReference("lipServices").push().key ?: return@launch
 
                 //  Create model object
@@ -362,7 +364,7 @@ class ProductViewmodel: ViewModel() {
             try {
                 var imageUrl = ""
 
-                // ✅ Upload image to Cloudinary (same method as eyebrows)
+                // ✅ Upload image to Cloudinary (same method as Lashes)
                 if (imageUri != null) {
                     imageUrl = uploadImageToCloudinary(context, imageUri)
                 }

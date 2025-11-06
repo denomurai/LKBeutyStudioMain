@@ -22,6 +22,7 @@ import com.example.lkbeautystore.ui.theme.AdminScreens.viewLipServicesScreen
 import com.example.lkbeautystore.ui.theme.CustomerScreens.bookingEyebrowsScreen
 import com.example.lkbeautystore.ui.theme.CustomerScreens.custBookingScreen
 import com.example.lkbeautystore.ui.theme.CustomerScreens.custViewEybrowsScreen
+import com.example.lkbeautystore.ui.theme.CustomerScreens.custViewLipScreen
 import com.example.lkbeautystore.ui.theme.CustomerScreens.dashBoardScreen
 import com.example.lkbeautystore.ui.theme.CustomerScreens.userLogin
 import com.example.lkbeautystore.ui.theme.CustomerScreens.userRegistration
@@ -60,6 +61,7 @@ fun AppNavHost(
         composable(ROUTE_CUST_VEIW_EYEBROS) {
             custViewEybrowsScreen(navController)
         }
+        composable (ROUTE_CUST_VIEW_LIP){ custViewLipScreen(navController) }
 
         // Book service with arguments
         composable(

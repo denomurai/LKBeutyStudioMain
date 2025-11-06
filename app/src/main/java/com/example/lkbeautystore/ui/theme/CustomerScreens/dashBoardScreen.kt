@@ -40,6 +40,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.lkbeautystore.R
 import com.example.lkbeautystore.navigation.ROUTE_ADMIN_LOGIN
 import com.example.lkbeautystore.navigation.ROUTE_CUST_VEIW_EYEBROS
+import com.example.lkbeautystore.navigation.ROUTE_CUST_VIEW_LIP
+
 // Customer Dashboard
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -95,7 +97,9 @@ fun dashBoardScreen (  navController: NavController,
                 colors = CardDefaults.cardColors(containerColor = Color(color = 0xFFB519A0))
             ){
 
-                Column  (modifier = Modifier.padding(16.dp).fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
+                Column  (modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center){
                     Icon(Icons.Default.Person, contentDescription = "Add Employee", modifier = Modifier.size(40.dp), Color(0xFF004D40))
                     Spacer(modifier = Modifier.width(20.dp))
 
@@ -104,7 +108,8 @@ fun dashBoardScreen (  navController: NavController,
                 }
             }// End of Eyebrows
 
-            Card (modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+            Card (modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp).clickable{navController.navigate(
+                ROUTE_CUST_VIEW_LIP)},
                 elevation = CardDefaults.cardElevation(10.dp),
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(color = 0xFFB519A0))
